@@ -33,23 +33,9 @@ end
 
 ```
 
-## Installation
+## Status
 
-Add this line to your application's Gemfile:
-
-    gem 'moria'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install moria
-
-## Usage
-
-TODO: Write usage instructions here
+Concept.
 
 ## Contributing
 
