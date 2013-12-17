@@ -1,6 +1,37 @@
 # Moria
 
-TODO: Write a gem description
+Auto Layout in RubyMotion.
+
+The concept:
+
+```ruby
+view1.layout do
+  top     >= (superview.top).offset(padding)
+  left    == (superview.left).offset(padding)
+  bottom  == (view3.top).offset(-padding)
+  right   == (view2.left).offset(-padding)
+  width   == view2.width
+  height  == [view2, view3]
+end
+
+view2.layout do
+  top     >= (superview.top).offset(padding)
+  left    == (superview.right).offset(padding)
+  bottom  == (view3.top).offset(-padding)
+  right   == (view2.right).offset(-padding)
+  width   == view1.width
+  height  == [view1, view3]
+end
+
+view3.layout do
+  top     >= (view1.bottom).offset(padding)
+  left    == (superview.left).offset(padding)
+  bottom  == (superview.bottom).offset(-padding)
+  right   == (superview.right).offset(-padding)
+  height  == [view1, view2]
+end
+
+```
 
 ## Installation
 
