@@ -1,9 +1,11 @@
 module Moria
   class ConstraintBuilder
     attr_reader :view
+    attr_reader :constraints
 
     def initialize(view)
       @view = view
+      @constraints = []
     end
 
     def install
@@ -36,6 +38,10 @@ module Moria
 
     def <=(constraint)
       self
+    end
+
+    def superview
+      view.superview
     end
   end
 end

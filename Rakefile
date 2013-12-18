@@ -9,5 +9,5 @@ Bundler.setup
 require 'moria'
 
 Motion::Project::App.setup do |app|
-  app.name = 'MotionLayoutTest'
+  app.name = 'Moria'
 end
