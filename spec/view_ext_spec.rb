@@ -9,8 +9,8 @@ describe "View Extension" do
     it "should build constraints on view" do
       @view.superview.constraints.size.should == 0
       @view.layout do
-        top     == superview.top
-        left    == superview.left
+        top     == superview.top.offset(10)
+        left == superview.left
         bottom  == superview.bottom
         right   == superview.right
       end

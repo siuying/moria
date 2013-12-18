@@ -16,7 +16,7 @@ class ExampleBasicView < UIView
 
     superview = self
     view1.layout do
-      top     >= (superview.top).offset(padding)
+      top     >= superview.top.offset(padding)
       left    == (superview.left).offset(padding)
       bottom  == (view3.top).offset(-padding)
       right   == (view2.left).offset(-padding)

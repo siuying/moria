@@ -3,10 +3,12 @@ module Moria
   class ViewAttribute
     attr_accessor :view
     attr_accessor :layout_attribute
+    attr_accessor :constant
 
     def initialize(view, layout_attribute)
       @view = view
       @layout_attribute = layout_attribute
+      @constant = nil
     end
 
     def size_attribute?
@@ -15,6 +17,11 @@ module Moria
 
     def alignment_attribute?
       !size_attribute?
+    end
+
+    def offset(constant)
+      self.constant = constant
+      self
     end
 
     def ==(another)

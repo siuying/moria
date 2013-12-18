@@ -16,6 +16,7 @@ module Moria
     def initialize(view_attribute)
       self.first_view_attribute = view_attribute
       self.priority             = UILayoutPriorityRequired
+      self.relation             = 0.0
       self.multiplier           = 1.0
       self.constant             = 0.0
     end
@@ -24,15 +25,17 @@ module Moria
     def install
       first_view              = first_view_attribute.view
       first_layout_attribute  = first_view_attribute.layout_attribute
-      second_view             = second_view_attribute.view
-      second_layout_attribute = second_view_attribute.layout_attribute
+      second_view             = second_view_attribute ? second_view_attribute.view : nil
+      second_layout_attribute = second_view_attribute ? second_view_attribute.layout_attribute : 0
 
       if first_view_attribute.alignment_attribute? && second_view_attribute.nil?
         raise "alignment attributes must have a second_view_attribute: #{self}"
       end
 
-      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.relation, toItem:second_view, 
-          attribute: second_layout_attribute, multiplier:self.multiplier, constant: self.constant)
+      self.constant = second_view_attribute.constant if second_view_attribute && second_view_attribute.constant
+
+      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.relation, 
+          toItem:second_view, attribute: second_layout_attribute, multiplier:self.multiplier, constant: self.constant)
       constraint.priority = self.priority
 
       if second_layout_attribute
@@ -45,8 +48,18 @@ module Moria
 
       self.installed_view.addConstraint(constraint)
       self.layout_constraint = constraint
+      self
     end
-    
+
+    def offset(constant)
+      self.constant = constant
+      self
+    end
+
+    def with
+      self
+    end
+
     def ==(another)
       # overrided == for the DSL
       if another.is_a?(ViewAttribute)
