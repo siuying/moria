@@ -17,7 +17,7 @@ describe "View Extension" do
     end
   end
 
-  Moria::LayoutAttributeExtension::LAYOUT_ATTRIBUTES.each do |name, layout_attribute|
+  Moria::LAYOUT_ATTRIBUTES.each do |name, layout_attribute|
     describe "##{name}" do
       it "should return attribute" do
         view_attribute = @view.send(name)

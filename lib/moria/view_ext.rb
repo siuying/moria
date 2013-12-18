@@ -1,19 +1,5 @@
 module Moria
   module LayoutAttributeExtension
-    LAYOUT_ATTRIBUTES = {
-      :left => NSLayoutAttributeLeft,
-      :top => NSLayoutAttributeTop,
-      :right => NSLayoutAttributeRight,
-      :bottom => NSLayoutAttributeBottom,
-      :leading => NSLayoutAttributeLeading,
-      :trailing => NSLayoutAttributeTrailing,
-      :width => NSLayoutAttributeWidth,
-      :height => NSLayoutAttributeHeight,
-      :centerX => NSLayoutAttributeCenterX,
-      :centerY => NSLayoutAttributeCenterY,
-      :baseline => NSLayoutAttributeBaseline
-    }
-
     LAYOUT_ATTRIBUTES.each do |key, value|
       define_method(key) do
         ViewAttribute.new self, value

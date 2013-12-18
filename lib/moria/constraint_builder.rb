@@ -12,20 +12,10 @@ module Moria
       true
     end
 
-    def top
-      self
-    end
-
-    def left
-      self
-    end
-
-    def right
-      self
-    end
-
-    def bottom
-      self
+    LAYOUT_ATTRIBUTES.each do |name, layout_attribute|
+      define_method(name) do
+        constraint_with(layout_attribute)
+      end
     end
 
     def ==(constraint)
@@ -42,6 +32,14 @@ module Moria
 
     def superview
       view.superview
+    end
+
+    private
+    def constraint_with(layout_attribute)
+      view_attribute = ViewAttribute.new(self.view, layout_attribute)
+      constraint = ViewConstraint.new(view_attribute)
+      self.constraints << constraint
+      constraint
     end
   end
 end
