@@ -38,9 +38,9 @@ module Moria
       if second_layout_attribute
         closest_common_superview = first_view.closest_common_superview(second_view)
         raise "Cannot install constraint: Could not find a common superview between #{first_view} and #{second_view}" unless closest_common_superview
-        self.installed_view = WeakRef.new(closest_common_superview)
+        self.installed_view = closest_common_superview
       else
-        self.installed_view = WeakRef.new(first_view)
+        self.installed_view = first_view
       end
 
       self.installed_view.addConstraint(constraint)
