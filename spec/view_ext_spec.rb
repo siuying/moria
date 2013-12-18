@@ -14,7 +14,7 @@ describe "View Extension" do
         bottom  == superview.bottom
         right   == superview.right
         width   == 140
-        height  <= 140
+        (height  <= 140).priority_low
       end
       @view.superview.constraints.size.should == 4
       @view.constraints.size.should == 2

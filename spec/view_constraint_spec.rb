@@ -116,4 +116,16 @@ describe "Moria::ViewConstraint" do
       @constraint.layout_constant.should == 10
     end
   end
+
+  describe "#uninstall" do
+    it "should remove constraint" do
+      @constraint >= @attribute2
+      @constraint.install
+      @constraint.uninstall
+      @superview.constraints.size.should == 0
+      @constraint.installed_view.should == nil
+      @constraint.layout_constraint.should == nil
+    end
+
+  end
 end

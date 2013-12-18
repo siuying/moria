@@ -52,6 +52,13 @@ module Moria
       self
     end
 
+    # remove the constraint from view
+    def uninstall
+      self.installed_view.removeConstraint(self.layout_constraint)
+      self.layout_constraint = nil
+      self.installed_view = nil
+    end
+
     def offset(constant)
       self.layout_constant = constant
       self
