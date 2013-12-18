@@ -7,13 +7,13 @@ describe "View Extension" do
 
   describe "#layout" do
     it "should build constraint" do
-      @view.layout do
+      builder = @view.layout do
         top     == superview.top
         left    == superview.left
         bottom  == superview.bottom
         right   == superview.right
       end
-      @view.constraints.size.should == 4
+      builder.constraints.size.should == 4
     end
   end
 

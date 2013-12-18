@@ -12,6 +12,7 @@ module Moria
       builder = ConstraintBuilder.new(self)
       builder.instance_eval(&block)
       builder.install
+      builder
     end
   end
 end

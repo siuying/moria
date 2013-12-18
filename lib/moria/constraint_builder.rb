@@ -18,18 +18,6 @@ module Moria
       end
     end
 
-    def ==(constraint)
-      self
-    end
-
-    def >=(constraint)
-      self
-    end
-
-    def <=(constraint)
-      self
-    end
-
     def superview
       view.superview
     end

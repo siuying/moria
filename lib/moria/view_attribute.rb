@@ -12,5 +12,14 @@ module Moria
     def size_attribute?
       layout_attribute == NSLayoutAttributeWidth || layout_attribute == NSLayoutAttributeHeight
     end
+
+    def ==(another)
+      if another.is_a?(ViewAttribute)
+        return view == another.view && layout_attribute == another.layout_attribute
+      end
+
+      return false
+    end
+
   end
 end

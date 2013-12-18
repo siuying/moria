@@ -18,6 +18,13 @@ describe "ConstraintBuilder" do
         top == superview.top
       end
       @builder.constraints.count.should == 1
+
+      constraint = @builder.constraints.first
+      constraint.first_view_attribute.view.should == @view
+      constraint.first_view_attribute.layout_attribute.should == NSLayoutAttributeTop
+      constraint.relation.should == NSLayoutRelationEqual
+      constraint.second_view_attribute.view.should == @view.superview
+      constraint.second_view_attribute.layout_attribute.should == NSLayoutAttributeTop
     end
   end
 end
