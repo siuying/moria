@@ -12,6 +12,15 @@ describe "ConstraintBuilder" do
     end
   end
 
+  describe "#install" do
+    it "should install each of the constraints" do
+      constraint = mock(:install, :return => true)
+
+      @builder.constraints = [constraint]
+      @builder.install.should == [constraint]
+    end
+  end
+
   describe "#top" do
     it "should add top constraint to builder" do
       @builder.instance_eval do

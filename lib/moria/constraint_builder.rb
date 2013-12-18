@@ -1,21 +1,24 @@
 module Moria
   class ConstraintBuilder
     attr_reader :view
-    attr_reader :constraints
+    attr_accessor :constraints
 
     def initialize(view)
       @view = view
       @constraints = []
     end
 
+    # install the constraints to view, the return the constraints object
     def install
       constraints = self.constraints.copy
-      constraints.each do |constraint|
+      self.constraints.each do |constraint|
         constraint.install
       end
       self.constraints.clear
+      constraints
     end
 
+    # For each of the LAYOUT_ATTRIBUTES, create a method that ViewConstraint
     LAYOUT_ATTRIBUTES.each do |name, layout_attribute|
       define_method(name) do
         constraint_with(layout_attribute)
