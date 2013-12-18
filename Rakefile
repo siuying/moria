@@ -7,6 +7,7 @@ require 'bundler'
 Bundler.setup
 
 require 'moria'
+require 'motion-stump'
 
 Motion::Project::App.setup do |app|
   app.name = 'Moria'
