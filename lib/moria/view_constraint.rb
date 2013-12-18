@@ -1,6 +1,6 @@
 module Moria
   # A constraint, created by a ConstraintBuilder.
-  # A view constraint contains two view attribute.
+  # A view constraint contains two view attribute (view, attribute) and a relation (>=, == or <=).
   class ViewConstraint
     attr_accessor :first_view_attribute
     attr_accessor :second_view_attribute
