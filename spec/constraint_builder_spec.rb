@@ -31,7 +31,7 @@ describe "ConstraintBuilder" do
       constraint = @builder.constraints.first
       constraint.first_view_attribute.view.should == @view
       constraint.first_view_attribute.layout_attribute.should == NSLayoutAttributeTop
-      constraint.relation.should == NSLayoutRelationEqual
+      constraint.layout_relation.should == NSLayoutRelationEqual
       constraint.second_view_attribute.view.should == @view.superview
       constraint.second_view_attribute.layout_attribute.should == NSLayoutAttributeTop
     end

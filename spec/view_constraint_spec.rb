@@ -13,7 +13,28 @@ describe "Moria::ViewConstraint" do
   describe "#offset" do
     it "should return self with constant set" do
       @constraint.offset(10.0)
-      @constraint.constant.should == 10.0
+      @constraint.layout_constant.should == 10.0
+    end
+  end
+
+  describe "#priority" do
+    it "should return self with priority set" do
+      @constraint.priority(10.0)
+      @constraint.layout_priority.should == 10.0
+    end
+  end
+
+  describe "#priority_high" do
+    it "should return self with priority set as UILayoutPriorityDefaultHigh" do
+      @constraint.priority_high
+      @constraint.layout_priority.should == UILayoutPriorityDefaultHigh
+    end
+  end
+
+  describe "#priority_low" do
+    it "should return self with priority set as UILayoutPriorityDefaultLow" do
+      @constraint.priority_low
+      @constraint.layout_priority.should == UILayoutPriorityDefaultLow
     end
   end
 
@@ -21,15 +42,15 @@ describe "Moria::ViewConstraint" do
     it "should return constraint with NSLayoutRelationEqual" do
       @constraint.==(@attribute2)
 
-      @constraint.relation.should == NSLayoutRelationEqual
+      @constraint.layout_relation.should == NSLayoutRelationEqual
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
     end
 
     it "should return constraint with == constant relation" do
       @constraint == 10
-      @constraint.relation.should == NSLayoutRelationEqual
-      @constraint.constant.should == 10
+      @constraint.layout_relation.should == NSLayoutRelationEqual
+      @constraint.layout_constant.should == 10
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == nil
     end
@@ -39,15 +60,15 @@ describe "Moria::ViewConstraint" do
     it "should return constraint with NSLayoutRelationGreaterThan" do
       @constraint.>=(@attribute2)
 
-      @constraint.relation.should == NSLayoutRelationGreaterThanOrEqual
+      @constraint.layout_relation.should == NSLayoutRelationGreaterThanOrEqual
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
     end
 
     it "should return constraint with >= constant relation" do
       @constraint >= 10
-      @constraint.relation.should == NSLayoutRelationGreaterThanOrEqual
-      @constraint.constant.should == 10
+      @constraint.layout_relation.should == NSLayoutRelationGreaterThanOrEqual
+      @constraint.layout_constant.should == 10
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == nil
     end
@@ -57,15 +78,15 @@ describe "Moria::ViewConstraint" do
     it "should return constraint with NSLayoutRelationLessThan" do
       @constraint.<=(@attribute2)
 
-      @constraint.relation.should == NSLayoutRelationLessThanOrEqual
+      @constraint.layout_relation.should == NSLayoutRelationLessThanOrEqual
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
     end
 
     it "should return constraint with <= constant relation" do
       @constraint <= 10
-      @constraint.relation.should == NSLayoutRelationLessThanOrEqual
-      @constraint.constant.should == 10
+      @constraint.layout_relation.should == NSLayoutRelationLessThanOrEqual
+      @constraint.layout_constant.should == 10
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == nil
     end
@@ -75,7 +96,7 @@ describe "Moria::ViewConstraint" do
     it "should add constraint with offset" do
       (@constraint >= @attribute2).with.offset(10)
       @constraint.install
-      @constraint.constant.should == 10
+      @constraint.layout_constant.should == 10
     end
   end
 
@@ -92,7 +113,7 @@ describe "Moria::ViewConstraint" do
     it "should add constraint on attribute with offset" do
       @constraint.==(@attribute2.offset(10))
       @constraint.install
-      @constraint.constant.should == 10
+      @constraint.layout_constant.should == 10
     end
   end
 end

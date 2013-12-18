@@ -5,23 +5,24 @@ module Moria
     attr_accessor :first_view_attribute
     attr_accessor :second_view_attribute
 
-    attr_accessor :priority
-    attr_accessor :relation
-    attr_accessor :multiplier
-    attr_accessor :constant
+    attr_accessor :layout_priority
+    attr_accessor :layout_relation
+    attr_accessor :layout_multiplier
+    attr_accessor :layout_constant
 
     attr_accessor :installed_view
     attr_accessor :layout_constraint
 
     def initialize(view_attribute)
       self.first_view_attribute = view_attribute
-      self.priority             = UILayoutPriorityRequired
-      self.relation             = 0.0
-      self.multiplier           = 1.0
-      self.constant             = 0.0
+      self.layout_priority      = UILayoutPriorityRequired
+      self.layout_relation      = 0.0
+      self.layout_multiplier    = 1.0
+      self.layout_constant      = 0.0
     end
 
-    # install constraint on view
+    # build a NSLayoutConstraint using layout_priority, layout_relation, layout_multiplier, layout_constant, first view attribute and optionally second view attribute
+    # and then install the constraint on view.
     def install
       first_view              = first_view_attribute.view
       first_layout_attribute  = first_view_attribute.layout_attribute
@@ -32,11 +33,11 @@ module Moria
         raise "alignment attributes must have a second_view_attribute: #{self}"
       end
 
-      self.constant = second_view_attribute.constant if second_view_attribute && second_view_attribute.constant
+      self.layout_constant = second_view_attribute.constant if second_view_attribute && second_view_attribute.constant
 
-      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.relation, 
-          toItem:second_view, attribute: second_layout_attribute, multiplier:self.multiplier, constant: self.constant)
-      constraint.priority = self.priority
+      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.layout_relation, 
+          toItem:second_view, attribute: second_layout_attribute, multiplier:self.layout_multiplier, constant: self.layout_constant)
+      constraint.priority = self.layout_priority
 
       if second_view_attribute
         closest_common_superview = first_view.closest_common_superview(second_view)
@@ -52,7 +53,7 @@ module Moria
     end
 
     def offset(constant)
-      self.constant = constant
+      self.layout_constant = constant
       self
     end
 
@@ -60,24 +61,39 @@ module Moria
       self
     end
 
+    def priority(value)
+      self.layout_priority = value
+      self
+    end
+
+    def priority_high
+      self.layout_priority = UILayoutPriorityDefaultHigh
+      self
+    end
+
+    def priority_low
+      self.layout_priority = UILayoutPriorityDefaultLow
+      self
+    end
+
     def ==(another)
       # overrided == for the DSL
       if another.is_a?(ViewAttribute)
         self.second_view_attribute = another
-        self.relation = NSLayoutRelationEqual
+        self.layout_relation = NSLayoutRelationEqual
         return self
       end
 
       if another.is_a?(Numeric)
-        self.constant = another
-        self.relation = NSLayoutRelationEqual
+        self.layout_constant = another
+        self.layout_relation = NSLayoutRelationEqual
         return self
       end
 
       if another.is_a?(ViewConstraint)
         first_view_attribute == another.first_view_attribute && 
           second_view_attribute == another.second_view_attribute &&
-          relation == another.relation
+          layout_relation == another.layout_relation
       else
         false
       end
@@ -87,13 +103,13 @@ module Moria
       # overrided == for the DSL
       if another.is_a?(ViewAttribute)
         self.second_view_attribute = another
-        self.relation = NSLayoutRelationGreaterThanOrEqual
+        self.layout_relation = NSLayoutRelationGreaterThanOrEqual
         return self
       end
 
       if another.is_a?(Numeric)
-        self.constant = another
-        self.relation = NSLayoutRelationGreaterThanOrEqual
+        self.layout_constant = another
+        self.layout_relation = NSLayoutRelationGreaterThanOrEqual
         return self
       end
 
@@ -104,13 +120,13 @@ module Moria
       # overrided == for the DSL
       if another.is_a?(ViewAttribute)
         self.second_view_attribute = another
-        self.relation = NSLayoutRelationLessThanOrEqual
+        self.layout_relation = NSLayoutRelationLessThanOrEqual
         return self
       end
 
       if another.is_a?(Numeric)
-        self.constant = another
-        self.relation = NSLayoutRelationLessThanOrEqual
+        self.layout_constant = another
+        self.layout_relation = NSLayoutRelationLessThanOrEqual
         return self
       end
 
