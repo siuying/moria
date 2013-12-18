@@ -9,7 +9,11 @@ module Moria
     end
 
     def install
-      true
+      constraints = self.constraints.copy
+      constraints.each do |constraint|
+        constraint.install
+      end
+      self.constraints.clear
     end
 
     LAYOUT_ATTRIBUTES.each do |name, layout_attribute|

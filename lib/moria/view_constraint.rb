@@ -4,10 +4,47 @@ module Moria
   class ViewConstraint
     attr_accessor :first_view_attribute
     attr_accessor :second_view_attribute
+
+    attr_accessor :priority
     attr_accessor :relation
+    attr_accessor :multiplier
+    attr_accessor :constant
+
+    attr_accessor :installed_view
+    attr_accessor :layout_constraint
 
     def initialize(view_attribute)
       self.first_view_attribute = view_attribute
+      self.priority             = UILayoutPriorityRequired
+      self.multiplier           = 1.0
+      self.constant             = 0.0
+    end
+
+    # install constraint on view
+    def install
+      first_view              = first_view_attribute.view
+      first_layout_attribute  = first_view_attribute.layout_attribute
+      second_view             = second_view_attribute.view
+      second_layout_attribute = second_view_attribute.layout_attribute
+
+      if first_view_attribute.alignment_attribute? && second_view_attribute.nil?
+        raise "alignment attributes must have a second_view_attribute: #{self}"
+      end
+
+      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.relation, toItem:second_view, 
+          attribute: second_layout_attribute, multiplier:self.multiplier, constant: self.constant)
+      constraint.priority = self.priority
+
+      if second_layout_attribute
+        closest_common_superview = first_view.closest_common_superview(second_view)
+        raise "Cannot install constraint: Could not find a common superview between #{first_view} and #{second_view}" unless closest_common_superview
+        self.installed_view = WeakRef.new(closest_common_superview)
+      else
+        self.installed_view = WeakRef.new(first_view)
+      end
+
+      self.installed_view.addConstraint(constraint)
+      self.layout_constraint = constraint
     end
     
     def ==(another)
