@@ -14,6 +14,23 @@ module Moria
       builder.install
       builder
     end
+
+    # find closest common superview
+    def closest_common_superview(second_view)
+      closest_common_superview = nil
+      second_view_superview = second_view
+      while (!closest_common_superview && second_view_superview)
+        first_view_superview = self
+        while (!closest_common_superview && first_view_superview)
+          if first_view_superview == second_view_superview
+            closest_common_superview = second_view_superview
+          end
+          first_view_superview = first_view_superview.superview
+        end
+        second_view_superview = second_view_superview.superview
+      end
+      closest_common_superview
+    end
   end
 end
 
