@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Moria::VERSION
   spec.authors       = ["Francis Chong"]
   spec.email         = ["francis@ignition.hk"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Auto Layout DSL in RubyMotion.}
+  spec.summary       = %q{Inspired by Masonry, Moria is a DSL for RubyMotion to create NSLayoutConstraint using Ruby style DSL.}
+  spec.homepage      = "https://github.com/siuying/moria"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
