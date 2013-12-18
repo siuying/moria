@@ -10,11 +10,14 @@ describe "View Extension" do
       @view.superview.constraints.size.should == 0
       @view.layout do
         top     == superview.top.offset(10)
-        left == superview.left
+        left    == superview.left
         bottom  == superview.bottom
         right   == superview.right
+        width   == 140
+        height  <= 140
       end
       @view.superview.constraints.size.should == 4
+      @view.constraints.size.should == 2
     end
   end
 

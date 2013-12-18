@@ -38,7 +38,7 @@ module Moria
           toItem:second_view, attribute: second_layout_attribute, multiplier:self.multiplier, constant: self.constant)
       constraint.priority = self.priority
 
-      if second_layout_attribute
+      if second_view_attribute
         closest_common_superview = first_view.closest_common_superview(second_view)
         raise "Cannot install constraint: Could not find a common superview between #{first_view} and #{second_view}" unless closest_common_superview
         self.installed_view = closest_common_superview
@@ -68,6 +68,12 @@ module Moria
         return self
       end
 
+      if another.is_a?(Numeric)
+        self.constant = another
+        self.relation = NSLayoutRelationEqual
+        return self
+      end
+
       if another.is_a?(ViewConstraint)
         first_view_attribute == another.first_view_attribute && 
           second_view_attribute == another.second_view_attribute &&
@@ -85,6 +91,12 @@ module Moria
         return self
       end
 
+      if another.is_a?(Numeric)
+        self.constant = another
+        self.relation = NSLayoutRelationGreaterThanOrEqual
+        return self
+      end
+
       super
     end
 
@@ -92,6 +104,12 @@ module Moria
       # overrided == for the DSL
       if another.is_a?(ViewAttribute)
         self.second_view_attribute = another
+        self.relation = NSLayoutRelationLessThanOrEqual
+        return self
+      end
+
+      if another.is_a?(Numeric)
+        self.constant = another
         self.relation = NSLayoutRelationLessThanOrEqual
         return self
       end

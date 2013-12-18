@@ -7,7 +7,7 @@ describe "Moria::ViewConstraint" do
     @superview.addSubview(view2)
     @attribute1 = Moria::ViewAttribute.new(view, NSLayoutAttributeHeight)
     @attribute2 = Moria::ViewAttribute.new(view2, NSLayoutAttributeHeight)
-    @constraint = Moria::ViewConstraint.new(Moria::ViewAttribute.new(view, NSLayoutAttributeHeight))
+    @constraint = Moria::ViewConstraint.new(@attribute1)
   end
 
   describe "#offset" do
@@ -25,6 +25,14 @@ describe "Moria::ViewConstraint" do
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
     end
+
+    it "should return constraint with == constant relation" do
+      @constraint == 10
+      @constraint.relation.should == NSLayoutRelationEqual
+      @constraint.constant.should == 10
+      @constraint.first_view_attribute.should == @attribute1
+      @constraint.second_view_attribute.should == nil
+    end
   end
 
   describe "#>=" do
@@ -35,6 +43,14 @@ describe "Moria::ViewConstraint" do
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
     end
+
+    it "should return constraint with >= constant relation" do
+      @constraint >= 10
+      @constraint.relation.should == NSLayoutRelationGreaterThanOrEqual
+      @constraint.constant.should == 10
+      @constraint.first_view_attribute.should == @attribute1
+      @constraint.second_view_attribute.should == nil
+    end
   end
 
   describe "#<=" do
@@ -44,6 +60,14 @@ describe "Moria::ViewConstraint" do
       @constraint.relation.should == NSLayoutRelationLessThanOrEqual
       @constraint.first_view_attribute.should == @attribute1
       @constraint.second_view_attribute.should == @attribute2
+    end
+
+    it "should return constraint with <= constant relation" do
+      @constraint <= 10
+      @constraint.relation.should == NSLayoutRelationLessThanOrEqual
+      @constraint.constant.should == 10
+      @constraint.first_view_attribute.should == @attribute1
+      @constraint.second_view_attribute.should == nil
     end
   end
 
