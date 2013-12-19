@@ -6,7 +6,8 @@ class ExampleListController < UITableViewController
     super
     self.title = "Examples"
     self.example_controllers = [
-      ExampleViewController.alloc.initWithTitle("Basic Example", view_class: ExampleBasicView)
+      ExampleViewController.alloc.initWithTitle("Basic Example", view_class: ExampleBasicView),
+      ExampleViewController.alloc.initWithTitle("Constant Example", view_class: ExampleConstantView)
     ]
     self
   end

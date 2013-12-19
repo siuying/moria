@@ -26,11 +26,15 @@ module Moria
     def install
       first_view              = first_view_attribute.view
       first_layout_attribute  = first_view_attribute.layout_attribute
-      second_view             = second_view_attribute ? second_view_attribute.view : nil
+      second_view             = second_view_attribute.view if second_view_attribute
       second_layout_attribute = second_view_attribute ? second_view_attribute.layout_attribute : 0
 
-      if first_view_attribute.alignment_attribute? && second_view_attribute.nil?
-        raise "alignment attributes must have a second_view_attribute: #{self}"
+      # alignment attributes must have a second_view_attribute
+      # missing second_view_attribute assumed refer to superview
+      # left == 10 is same as left == superview.left.offset(10)
+      if first_view_attribute.alignment_attribute? && second_view.nil?
+        second_view = first_view.superview
+        second_layout_attribute = first_layout_attribute
       end
 
       self.layout_constant = second_view_attribute.constant if second_view_attribute && second_view_attribute.constant
@@ -39,7 +43,7 @@ module Moria
           toItem:second_view, attribute: second_layout_attribute, multiplier:self.layout_multiplier, constant: self.layout_constant)
       constraint.priority = self.layout_priority
 
-      if second_view_attribute
+      if second_view
         closest_common_superview = first_view.closest_common_superview(second_view)
         raise "Cannot install constraint: Could not find a common superview between #{first_view} and #{second_view}" unless closest_common_superview
         self.installed_view = closest_common_superview

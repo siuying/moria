@@ -1,12 +1,12 @@
 describe "Moria::ViewConstraint" do
   before do
     @superview = UIView.new
-    view = UIView.new
-    view2 = UIView.new
-    @superview.addSubview(view)
-    @superview.addSubview(view2)
-    @attribute1 = Moria::ViewAttribute.new(view, NSLayoutAttributeHeight)
-    @attribute2 = Moria::ViewAttribute.new(view2, NSLayoutAttributeHeight)
+    @view1 = UIView.new
+    @view2 = UIView.new
+    @superview.addSubview(@view1)
+    @superview.addSubview(@view2)
+    @attribute1 = Moria::ViewAttribute.new(@view1, NSLayoutAttributeHeight)
+    @attribute2 = Moria::ViewAttribute.new(@view2, NSLayoutAttributeHeight)
     @constraint = Moria::ViewConstraint.new(@attribute1)
   end
 
@@ -114,6 +114,17 @@ describe "Moria::ViewConstraint" do
       @constraint.==(@attribute2.offset(10))
       @constraint.install
       @constraint.layout_constant.should == 10
+    end
+
+    it "should add constraint to superview, if it is constant constraint on aligment attribute" do
+      @attribute1 = Moria::ViewAttribute.new(@view1, NSLayoutAttributeCenterX)
+      @constraint = Moria::ViewConstraint.new(@attribute1)
+
+      @constraint.==(10)
+      @constraint.install
+      @constraint.layout_constant.should == 10
+      @constraint.layout_constraint.firstItem.should == @view1
+      @constraint.layout_constraint.secondItem.should == @superview
     end
   end
 
