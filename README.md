@@ -35,7 +35,7 @@ end
 
 ## Status
 
-Partially working, see example_basic_view.rb.
+Partially working, see examples in ```app/```
 
 ## About
 
