@@ -37,6 +37,11 @@ end
 
 Partially working, see example_basic_view.rb.
 
+## About
+
+The idea is definitely steal from [Masonry](https://github.com/cloudkite/Masonry), replace the objective-c and
+function hacking with ruby superpower.
+
 ## Contributing
 
 1. Fork it
