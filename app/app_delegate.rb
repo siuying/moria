@@ -4,8 +4,8 @@ class AppDelegate
     self.window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     self.window.backgroundColor = UIColor.whiteColor
 
-    exampleController = ExampleViewController.alloc.initWithTitle("Basic Example", view_class: ExampleBasicView)
-    navController = UINavigationController.alloc.initWithRootViewController(exampleController)
+    view_controller   = ExampleListController.alloc.init
+    navController     = UINavigationController.alloc.initWithRootViewController(view_controller)
     self.window.rootViewController = navController
     self.window.makeKeyAndVisible
     true
