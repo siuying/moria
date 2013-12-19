@@ -19,6 +19,12 @@ describe "View Extension" do
       @view.superview.constraints.size.should == 4
       @view.constraints.size.should == 2
     end
+
+    it "should set view translatesAutoresizingMaskIntoConstraints to false" do
+      @view.layout do
+      end
+      @view.translatesAutoresizingMaskIntoConstraints.should.be.false
+    end
   end
 
   describe "#closest_common_superview" do

@@ -13,24 +13,26 @@ class ExampleBasicView < UIView
     view3 = UIView.new
     view3.backgroundColor = UIColor.blueColor
     self.addSubview view3
+    padding = 10
 
-    superview = self
     view1.layout do
       top     >= superview.top.offset(padding)
       left    == (superview.left).offset(padding)
       bottom  == (view3.top).offset(-padding)
       right   == (view2.left).offset(-padding)
       width   == view2.width
-      height  == [view2, view3]
+      height  == view2.height
+      height  == view3.height
     end
 
     view2.layout do
       top     >= (superview.top).offset(padding)
-      left    == (superview.right).offset(padding)
+      left    == (view1.right).offset(padding)
       bottom  == (view3.top).offset(-padding)
-      right   == (view2.right).offset(-padding)
+      right   == (superview.right).offset(-padding)
       width   == view1.width
-      height  == [view1, view3]
+      height  == view1.height
+      height  == view3.height
     end
 
     view3.layout do
@@ -38,7 +40,8 @@ class ExampleBasicView < UIView
       left    == (superview.left).offset(padding)
       bottom  == (superview.bottom).offset(-padding)
       right   == (superview.right).offset(-padding)
-      height  == [view1, view2]
+      height  == view1.height
+      height  == view2.height
     end
 
     self

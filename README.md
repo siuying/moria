@@ -16,9 +16,9 @@ end
 
 view2.layout do
   top     >= (superview.top).offset(padding)
-  left    == (superview.right).offset(padding)
+  left    == (view1.right).offset(padding)
   bottom  == (view3.top).offset(-padding)
-  right   == (view2.right).offset(-padding)
+  right   == (superview.right).offset(-padding)
   width   == view1.width
   height  == [view1, view3]
 end

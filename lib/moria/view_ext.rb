@@ -9,6 +9,7 @@ module Moria
 
   module LayoutExt
     def layout(&block)
+      self.translatesAutoresizingMaskIntoConstraints = false
       builder = ConstraintBuilder.new(self)
       builder.instance_eval(&block)
       builder.install
