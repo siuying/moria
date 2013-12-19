@@ -35,7 +35,7 @@ end
 
 ## Status
 
-Concept.
+Partially working, see example_basic_view.rb.
 
 ## Contributing
 
