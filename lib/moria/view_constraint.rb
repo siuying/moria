@@ -13,6 +13,8 @@ module Moria
     attr_accessor :installed_view
     attr_accessor :layout_constraint
 
+    attr_accessor :moria_key
+
     def initialize(view_attribute)
       self.first_view_attribute = view_attribute
       self.layout_priority      = UILayoutPriorityRequired
@@ -42,6 +44,7 @@ module Moria
       constraint = LayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.layout_relation, 
           toItem:second_view, attribute: second_layout_attribute, multiplier:self.layout_multiplier, constant: self.layout_constant)
       constraint.priority = self.layout_priority
+      constraint.moria_key = self.moria_key
 
       if second_view
         closest_common_superview = first_view.closest_common_superview(second_view)
@@ -84,6 +87,11 @@ module Moria
 
     def priority_low
       self.layout_priority = UILayoutPriorityDefaultLow
+      self
+    end
+
+    def key(key)
+      self.moria_key = key
       self
     end
 

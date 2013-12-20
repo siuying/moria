@@ -19,13 +19,22 @@ class ExampleDebugView < UIView
     view3.text = "this should look broken! check your console!"
     addSubview view3
 
+    # you can attach debug keys to views
+    view1.moria_key = "view1"
+    view2.moria_key = "view2"
+    view3.moria_key = "view3"
+    self.moria_key = "superview"
+
+    puts "view1.moria_key = #{view1.moria_key}"
+
     padding = 10
     view3.layout do
+      (height >= 5000).key("ConstantConstraint") # attache keys to constraint
+
       top == superview.top.offset(1)
       left == superview.left.offset(1)
       bottom == superview.bottom.offset(-1)
       right == superview.right.offset(-1)
-      height >= 5000
 
       top == view1.bottom.offset(padding)
       left == superview.left.offset(padding)

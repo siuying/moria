@@ -59,7 +59,6 @@ module Moria
   end
 end
 
-
 NSLayoutConstraint.instance_eval do
   include Moria::LayoutConstraintDebugExtension
 end

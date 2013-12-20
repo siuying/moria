@@ -38,4 +38,5 @@ end
 UIView.instance_eval do
   include Moria::LayoutAttributeExtension
   include Moria::LayoutExt
+  attr_accessor :moria_key
 end
