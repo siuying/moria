@@ -107,7 +107,7 @@ describe "Moria::ViewConstraint" do
       constraint = @constraint.install
       constraint.installed_view.should == @superview
       constraint.layout_constraint.should.not.be.nil
-      constraint.layout_constraint.class.should == NSLayoutConstraint
+      constraint.layout_constraint.should.is_a NSLayoutConstraint
     end
 
     it "should add constraint on attribute with offset" do
