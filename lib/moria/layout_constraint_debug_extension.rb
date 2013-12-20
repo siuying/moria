@@ -55,8 +55,10 @@ module Moria
       description.join('')
     end
   end
-end
 
-NSLayoutConstraint.instance_eval do
-  include Moria::LayoutConstraintDebugExtension
+  def self.install_debug_extension
+    NSLayoutConstraint.instance_eval do
+      include Moria::LayoutConstraintDebugExtension
+    end
+  end
 end

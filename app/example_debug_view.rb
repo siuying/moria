@@ -19,6 +19,9 @@ class ExampleDebugView < UIView
     view3.text = "this should look broken! check your console!"
     addSubview view3
 
+    # install debug extension to NSConstraint, make the debug output more readable
+    Moria.install_debug_extension
+
     # you can attach debug keys to views
     view1.moria_key = "view1"
     view2.moria_key = "view2"
