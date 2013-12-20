@@ -7,7 +7,7 @@ module Moria
     end
   end
 
-  module LayoutExt
+  module LayoutExtension
     def layout(&block)
       self.translatesAutoresizingMaskIntoConstraints = false
       builder = ConstraintBuilder.new(self)
@@ -37,6 +37,6 @@ end
 
 UIView.instance_eval do
   include Moria::LayoutAttributeExtension
-  include Moria::LayoutExt
+  include Moria::LayoutExtension
   attr_accessor :moria_key
 end
