@@ -27,9 +27,7 @@ module Moria
     }
 
     def description_for_object(obj)
-      if obj.respond_to?(:moria_key) && obj.moria_key
-        "#{obj.class}:#{obj.moria_key}"
-      end
+      return "#{obj.class}:#{obj.moria_key}" if obj.respond_to?(:moria_key) && obj.moria_key
       return "#{obj.class}:0x#{object_id.to_s(16)}"
     end
 

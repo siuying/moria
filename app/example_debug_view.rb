@@ -25,8 +25,6 @@ class ExampleDebugView < UIView
     view3.moria_key = "view3"
     self.moria_key = "superview"
 
-    puts "view1.moria_key = #{view1.moria_key}"
-
     padding = 10
     view3.layout do
       (height >= 5000).key("ConstantConstraint") # attache keys to constraint
