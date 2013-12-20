@@ -39,7 +39,7 @@ module Moria
 
       self.layout_constant = second_view_attribute.constant if second_view_attribute && second_view_attribute.constant
 
-      constraint = NSLayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.layout_relation, 
+      constraint = LayoutConstraint.constraintWithItem(first_view, attribute:first_layout_attribute, relatedBy:self.layout_relation, 
           toItem:second_view, attribute: second_layout_attribute, multiplier:self.layout_multiplier, constant: self.layout_constant)
       constraint.priority = self.layout_priority
 
