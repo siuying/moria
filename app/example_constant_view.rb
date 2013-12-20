@@ -10,14 +10,14 @@ class ExampleConstantView < UIView
     view2.backgroundColor = UIColor.orangeColor
     self.addSubview view2
 
-    view1.layout do
+    view1.create_constraint do
       top     == 20
       left    == 20
       bottom  == -20
       right   == -20
     end
 
-    view2.layout do
+    view2.create_constraint do
       centerY == 50
       centerX == 0
       width   == 200

@@ -15,7 +15,7 @@ class ExampleBasicView < UIView
     self.addSubview view3
     padding = 10
 
-    view1.layout do
+    view1.create_constraint do
       top     >= superview.top.offset(padding)
       left    == (superview.left).offset(padding)
       bottom  == (view3.top).offset(-padding)
@@ -25,7 +25,7 @@ class ExampleBasicView < UIView
       height  == view3.height
     end
 
-    view2.layout do
+    view2.create_constraint do
       top     >= (superview.top).offset(padding)
       left    == (view1.right).offset(padding)
       bottom  == (view3.top).offset(-padding)
@@ -35,7 +35,7 @@ class ExampleBasicView < UIView
       height  == view3.height
     end
 
-    view3.layout do
+    view3.create_constraint do
       top     >= (view1.bottom).offset(padding)
       left    == (superview.left).offset(padding)
       bottom  == (superview.bottom).offset(-padding)

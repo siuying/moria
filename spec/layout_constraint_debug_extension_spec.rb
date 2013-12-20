@@ -22,6 +22,9 @@ describe "Moria::LayoutConstraintDebugExtension" do
       constraint = Moria::LayoutConstraint.constraintWithItem(view1, attribute:NSLayoutAttributeTop, relatedBy:NSLayoutRelationEqual,
         toItem: view2, attribute: NSLayoutAttributeTop, multiplier: 1, constant: 10)
 
+      # enable the extension
+      constraint.extend(Moria::LayoutConstraintDebugExtension)
+
       desc = constraint.description
       desc.should.include "UIView:view1.top == UIView:view2.top + 10.0"
     end

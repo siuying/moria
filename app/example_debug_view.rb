@@ -29,7 +29,7 @@ class ExampleDebugView < UIView
     self.moria_key = "superview"
 
     padding = 10
-    view3.layout do
+    view3.create_constraint do
       (height >= 5000).key("ConstantConstraint") # attache keys to constraint
 
       top == superview.top.offset(1)
@@ -46,7 +46,7 @@ class ExampleDebugView < UIView
       height == view2.height
     end
 
-    view1.layout do
+    view1.create_constraint do
       top == superview.top.offset(padding)
       left == superview.left.offset(padding)
       bottom == view3.top.offset(-padding)
@@ -57,7 +57,7 @@ class ExampleDebugView < UIView
       height == view2.height
     end
 
-    view2.layout do
+    view2.create_constraint do
       top == superview.top.offset(padding)
       left == view1.right.offset(padding)
       bottom == view3.top.offset(-padding)

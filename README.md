@@ -5,7 +5,7 @@ Auto Layout in RubyMotion.
 The concept:
 
 ```ruby
-view1.layout do
+view1.create_constraint do
   top     >= (superview.top).offset(padding)
   left    == (superview.left).offset(padding)
   bottom  == (view3.top).offset(-padding)
@@ -14,7 +14,7 @@ view1.layout do
   height  == [view2, view3]
 end
 
-view2.layout do
+view2.create_constraint do
   top     >= (superview.top).offset(padding)
   left    == (view1.right).offset(padding)
   bottom  == (view3.top).offset(-padding)
@@ -23,7 +23,7 @@ view2.layout do
   height  == [view1, view3]
 end
 
-view3.layout do
+view3.create_constraint do
   top     >= (view1.bottom).offset(padding)
   left    == (superview.left).offset(padding)
   bottom  == (superview.bottom).offset(-padding)

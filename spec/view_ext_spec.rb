@@ -5,10 +5,10 @@ describe "View Extension" do
     superview.addSubview(@view)
   end
 
-  describe "#layout" do
+  describe "#create_constraint" do
     it "should build constraints on view" do
       @view.superview.constraints.size.should == 0
-      @view.layout do
+      @view.create_constraint do
         top     == superview.top.offset(10)
         left    == superview.left
         bottom  == superview.bottom
@@ -21,7 +21,7 @@ describe "View Extension" do
     end
 
     it "should set view translatesAutoresizingMaskIntoConstraints to false" do
-      @view.layout do
+      @view.create_constraint do
       end
       @view.translatesAutoresizingMaskIntoConstraints.should.be.false
     end
